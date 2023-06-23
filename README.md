@@ -1,7 +1,7 @@
 # Model filtering tool
-ML utilities to analyze, filter and cleanup models checkpoints. 
+ML utility to analyze, filter and cleanup models checkpoints. 
 
-The `mdl_inspect` tool loads a model scan its structure and identifies and filters out weights that match a given minimum treshold. 
+The `mdl_inspect` tool loads a model scan its structure and identifies and filters out weights to match a given treshold requirement. 
 
 ## Setup
 
