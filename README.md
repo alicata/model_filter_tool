@@ -23,6 +23,8 @@ pip install -r requirements
 Synchronize model in nb to/from Drive, for persistent caching of model.
 ```
 !pip install https://github.com/alicata/model_filter_tool/master
+```
+
 ## Limitations
 Currently the tool supports only the .pth format. More formats are planned. 
 
