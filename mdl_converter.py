@@ -2,7 +2,7 @@ import numpy as np
 import torch.onnx
 import onnx
 import onnxruntime
-
+import shutil
 
 def test_inference(onnx_path):
     def to_numpy(tensor):
@@ -47,7 +47,21 @@ def export_torch_to_onnx(torch_model, onnx_model_path, shape=(1, 224, 224), conv
         print("Exported model has been tested with ONNXRuntime, and the result looks good!")
 
 
+"""
+ModelSyncher: synchronize a model stored in cache / drive, load at start, save during updates
+"""
+class ModelSyncher:
+    def __init__(self, drive_subfolder='data'):
+       self.drive_folder = f"/content/drive/MyDrive/{drive_subfolder}"
 
+    def start(self, model_path):
+        self.model_path = model_path
+
+    def update(self, model):   
+        shutil.copy(self.model_path,  self.drive_folder + self.model_path)
+
+    def stop(self):
+        pass
 
 
 
