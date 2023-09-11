@@ -19,6 +19,11 @@ pip install -r requirements
 | ./mdl_inspect.py model.pth | Inspect structure of the model checkpoint | Y |
 | ./mdl_inspect.py -f 0.01 model.pth | supress all weightes below 0.01 in the model checkpoint | N |
 
+# Jupyter Notebook: Model Synching
+Synchronize model in nb to/from Drive, for persistent caching of model.
+```
+!pip install https://github.com/alicata/model_filter_tool/master
+```
 
 ## Limitations
 Currently the tool supports only the .pth format. More formats are planned. 
