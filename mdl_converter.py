@@ -12,25 +12,25 @@ def load_onnx(onnx_model_path):
     onnx.checker.check_model(onnx_model)
     return onnx_model
 
-def validate_model_inference(onnx_path, torch_out):
+def validate_model_inference(onnx_path, torch_out, x):
     ort_session = onnxruntime.InferenceSession(onnx_path)
     ort_inputs = {ort_session.get_inputs()[0].name: to_numpy(x)}
     ort_outs = ort_session.run(None, ort_inputs)
-    print("input : ", ort_inputs)
-    print("output: ", ort_outs)
+    print("val: ort inputs : ", ort_inputs)
+    print("val: ort outputs: ", ort_outs)
     np.testing.assert_allclose(to_numpy(torch_out), ort_outs[0], rtol=1e-03, atol=1e-05)
-    print("Exported model has been tested with ONNXRuntime, and the result looks good!")
+    print("val: Exported model tested ONNXRuntime: prediction results all close to original. OK")
 
 def export_torch_to_onnx(torch_model, onnx_model_path, shape=(3, 224, 224), conversion_check_enabled=False):
     # Input to the model, output a prediction
-    print("switch model to eval mode (disable dropout and batchnorm)")
+    print("export: switch model to eval mode (disable dropout and batchnorm)")
     torch_model.eval()
 
     # Generate a batch with 1 random sample, and given shape
     #x = torch.randn(1, shape[0], shape[1], shape[2], requires_grad=True)
     x = torch.randn(1, *shape, requires_grad=True)
 
-    print("export the model in onnx format using tracing method: ", onnx_model_path)
+    print("export: convert the model in onnx format using tracing method: ", onnx_model_path)
     torch.onnx.export(torch_model,             # model being run
                     x,                         # model input (or a tuple for multiple inputs)
                     onnx_model_path,           # where to save the model (can be a file or file-like object)
@@ -42,8 +42,9 @@ def export_torch_to_onnx(torch_model, onnx_model_path, shape=(3, 224, 224), conv
                     dynamic_axes={'input' : {0 : 'batch_size'}, 'output' : {0 : 'batch_size'}}) # batch size can change
 
     if conversion_check_enabled:
+        print(f"---- exported model validation ----")
         torch_out = torch_model(x)
-        print("original model output: ", torch_out)
+        print("val: original model output: ", torch_out)
         # compare ONNX Runtime and PyTorch results
-        validate_model_inference(onnx_model_path, torch_out)    
-
+        validate_model_inference(onnx_model_path, torch_out, x)
+        print("val: model validation completed.")

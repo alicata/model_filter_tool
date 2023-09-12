@@ -20,7 +20,7 @@ if (len(sys.argv)) > 1:
 
     print(f"converting input model {torch_model_path} to {onnx_model_path} ...")
     torch_model.load_state_dict(torch.load(torch_model_path))
-    export_torch_to_onnx(torch_model, onnx_model_path, shape=(1,), conversion_check_enabled=False)
+    export_torch_to_onnx(torch_model, onnx_model_path, shape=(1,), conversion_check_enabled=True)
 else:
     print("error: no input model provided for convertion!")
     exit(0)
