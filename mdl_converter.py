@@ -23,11 +23,12 @@ def validate_model_inference(onnx_path, torch_out):
 
 def export_torch_to_onnx(torch_model, onnx_model_path, shape=(3, 224, 224), conversion_check_enabled=False):
     # Input to the model, output a prediction
-    print("eval mode: disable dropout and batchnorm")
+    print("switch model to eval mode (disable dropout and batchnorm)")
     torch_model.eval()
 
     # Generate a batch with 1 random sample, and given shape
-    x = torch.randn(1, shape[0], shape[1], shape[2], requires_grad=True)
+    #x = torch.randn(1, shape[0], shape[1], shape[2], requires_grad=True)
+    x = torch.randn(1, *shape, requires_grad=True)
 
     print("export the model in onnx format using tracing method: ", onnx_model_path)
     torch.onnx.export(torch_model,             # model being run
