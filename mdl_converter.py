@@ -57,7 +57,7 @@ class ModelSyncher:
     def start(self, model_path):
         self.model_path = model_path
 
-    def update(self, model):   
+    def update(self):   
         shutil.copy(self.model_path,  self.drive_folder + self.model_path)
 
     def stop(self):
