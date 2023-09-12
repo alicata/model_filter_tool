@@ -1,5 +1,5 @@
 # MDL - A Model filtering tool
-ML utility to analyze, filter and cleanup models checkpoints. 
+ML utility to analyze, filter, structurally validate and cleanup DL models checkpoints. 
 
 The `mdl_inspect` tool loads a model scan its structure and identifies and filters out weights to match a given treshold requirement. 
 
@@ -21,11 +21,11 @@ pip install -r requirements
 
 
 ## Utilities
-### Scripts
-| Script          | Description   | Implemented |
-| ---------------- |:-------------| :-----:|
-| ./run_generate_unit_test_model.py| Generate simple 1d logistic regression model to aid unit testing | Y |
-| ./run_inference_test.py | Exercise ONNX RT inference on the super resolution model | Y |
+### Scripts To Support Validation Tasks
+| Script          | Description   | Netron model visualization   | Implemented |
+| ---------------- |:-------------|:-------------| :-----:|
+| ./run_generate_unit_test_model.py| Generate simple [1d logistic regression model](https://github.com/alicata/model_filter_tool/blob/main/trainers/trainer_simple.py#L8) to aid unit testing | https://netron.app/?url=https://github.com/alicata/model_filter_tool/blob/main/models/unit_test_model.pth | Y |
+| ./run_inference_test.py | Exercise ONNX RT inference on the super resolution model | https://netron.app/?url=https://github.com/alicata/model_filter_tool/blob/main/models/model.super_resolution.onnx |Y |
 
 ### Jupyter Notebook
 Synchronize model in nb to/from Drive, for persistent caching of model.
@@ -42,6 +42,12 @@ sync.update()
 
 ```
 
-## Limitations
+# Model Cards
+| Model Name       | Identifier  | Description   |  Genesis | Netron model visualization   |
+| ---------------- | :------------- | :------------- | :------------- | :-----: |
+| unit_test_model.pth | [LogisticRegression](https://github.com/alicata/model_filter_tool/blob/main/trainers/trainer_simple.py#L8) | 1D logistic regression model binary classifier | trained with synthetic data by AutoGeneratorTrainer | https://netron.app/?url=https://github.com/alicata/model_filter_tool/blob/main/models/unit_test_model.pth |
+
+
+# Limitations
 Currently the tool supports only the .pth format. More formats are planned. 
 
