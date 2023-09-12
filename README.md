@@ -51,3 +51,10 @@ sync.update()
 # Limitations
 Currently the tool supports only the .pth format. More formats are planned. 
 
+
+## Validation Workflow 1: Convert and Validate Auto Generated Unit Test Model. 
+| Step        | Description   | Expected Result |
+| ---------------- |:-------------| :-----:|
+| ./run_generate_unit_test_model.py | Generate PyTorch simple 1d input, one layer, unit test model | unit_test_model.pth saved in output folder |
+| ./run_convert_unit_test_model.py | Convert and validate unit test model from PyTorch to ONNX graph format | unit_test_model.onnx saved in output folder|
+| Visually inspect graph structure | Visualize ONNX graph structure with Netron web app | generated and reference unit test models show same [ONNX graph in Netron](https://netron.app/?url=https://github.com/alicata/model_filter_tool/blob/main/models/unit_test_model.onnx)|
