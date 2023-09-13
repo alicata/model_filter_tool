@@ -9,18 +9,21 @@ import sys
 os.makedirs("./output/", exist_ok=True)
 
 def get_model(torch_model_path):
+    """Create model from network definition and load weights into it
+
+    Args:
+        torch_model_path (str): path to the model weights
+
+    Returns:
+        model (nn.Module): network model loaded with the weights
+        input_shape (tuple): input shape of the model
+
     """
-    get_model create network definition and loads weights into it
+    model = LogisticRegressionNetwork(input_dims=1)
 
-    NOTE: for now tested and validated only with the unit test model 1d logistic regression
-    """
-
-    # TODO: input dimenions and shape should be dynamically retreived from the model structure
-    input_dims = 1
-
-    model = LogisticRegressionNetwork(input_dims)
+    # Get input shape from the model
     input_shape = next(model.parameters()).shape
-    assert(input_shape[0]==input_dims)
+    assert(input_shape[0]==1)
 
     model.load_state_dict(torch.load(torch_model_path))
     print(model)

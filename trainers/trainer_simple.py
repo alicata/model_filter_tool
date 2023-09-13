@@ -6,9 +6,9 @@ import torch.optim as optim
 
 # Logistic Regression Model
 class LogisticRegressionNetwork(nn.Module):
-    def __init__(self, input_dim):
+    def __init__(self, input_dims):
         super(LogisticRegressionNetwork, self).__init__()
-        self.linear = nn.Linear(input_dim, 1)
+        self.linear = nn.Linear(input_dims, 1)
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
