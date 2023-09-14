@@ -31,8 +31,8 @@ def validate_model_inference(onnx_path, torch_out, x):
             print("val: Exported model tested ONNXRuntime: prediction results not close to original. FAIL")
             print(e)
     except Exception as e:
-        print("val: Exported but ***NOT VALIDATED***: ORT error, not completed.")
-        print(e)
+        print("     [VALIDATION ERROR] : Exported but onnx file was not validated because ORT cannot complete.")
+        print("    ", e)
 
 
 def export_torch_to_onnx(torch_model, onnx_model_path, shape=(3, 224, 224), conversion_check_enabled=False):
