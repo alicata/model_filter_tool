@@ -43,13 +43,14 @@ if (len(sys.argv)) > 1:
     args = parser.parse_args()
     torch_model_path = args.input_model
 
-    onnx_model_path = torch_model_path.split(".pth")[0] + ".onnx"
-
     torch_model, input_shape = get_model(torch_model_path)
     if parser.parse_args().compress:
         print("converting pytorch model to quantized model ...")
         torch_model = torch.quantization.convert(torch_model, inplace=True)
-        torch_model.eval()
+        onnx_model_path = torch_model_path.split(".pth")[0] + ".quant.onnx"
+    else:
+        onnx_model_path = torch_model_path.split(".pth")[0] + ".onnx"
+    torch_model.eval()
 
     print(f"converting input model {torch_model_path} to {onnx_model_path} ...")
     export_torch_to_onnx(torch_model, onnx_model_path, shape=input_shape, conversion_check_enabled=True)
