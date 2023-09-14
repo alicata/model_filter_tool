@@ -1,0 +1,21 @@
+pytorch1.12.1:­
+6
+input
+onnx::MatMul_7onnx::Add_4MatMul_0"MatMul
+7
+linear.bias
+onnx::Add_4onnx::Sigmoid_5Add_1"Add
+-
+onnx::Sigmoid_5output	Sigmoid_2"Sigmoid	torch_jit*Blinear.biasJÀ*Bonnx::MatMul_7Jg@Z%
+input
+
+
+batch_size
+
+b&
+output
+
+
+batch_size
+
+B
